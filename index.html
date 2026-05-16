@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        اینترنت آزاد حق همه مردم ایران است
+    </title>
+    <!-- Google Fonts for Farsi -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ef4444;
+            /* Red for emphasis */
+            --primary-hover: #dc2626;
+            --bg: #ffffff;
+            --surface: #f8fafc;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --accent: #2563eb;
+            /* Blue accent */
+            --radius: 12px;
+            --font-family: 'Vazirmatn', system-ui, -apple-system, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 0;
+            /* Content is now pushed down automatically by the relative banner */
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header {
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            color: var(--text-main);
+            background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .description {
+            font-size: clamp(1.1rem, 2vw, 1.25rem);
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .code-container {
+            position: relative;
+            background: #0f172a;
+            border-radius: var(--radius);
+            padding: 24px;
+            text-align: left;
+            direction: ltr;
+            margin: 2rem 0;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .code-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        code {
+            font-family: 'Fira Code', 'Courier New', monospace;
+            color: #e2e8f0;
+            font-size: 14px;
+            word-break: break-all;
+        }
+
+        .demo-section {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        button {
+            font-family: var(--font-family);
+            background: var(--surface);
+            border: 1px solid #e2e8f0;
+            color: var(--text-main);
+            padding: 12px 24px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        button:hover {
+            background: #fff;
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+        }
+
+        button.btn-primary {
+            background: var(--text-main);
+            color: white;
+            border: none;
+        }
+
+        button.btn-primary:hover {
+            background: #1e293b;
+            color: white;
+        }
+
+        /* Customization Guide */
+        .guide-toggle {
+            margin-top: 4rem;
+            font-size: 1.1rem;
+            color: var(--accent);
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-weight: 600;
+            display: inline-block;
+            padding: 8px 16px;
+            border: 2px solid transparent;
+            border-radius: var(--radius);
+        }
+
+        .guide-toggle:hover {
+            color: var(--primary);
+            background: rgba(239, 68, 68, 0.05);
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+
+        .guide-content {
+            display: none;
+            text-align: right;
+            background: var(--surface);
+            padding: 30px;
+            border-radius: var(--radius);
+            margin-top: 1.5rem;
+            border: 1px solid #e2e8f0;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .guide-content h3 {
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .guide-content ul {
+            list-style: none;
+        }
+
+        .guide-content li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-right: 20px;
+        }
+
+        .guide-content li::before {
+            content: '•';
+            position: absolute;
+            right: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Utility */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>آزادی برای اینترنت ایران</h1>
+            <p class="description">با اضافه کردن یک خط کد ساده به وب‌سایت خود، به جمع حامیان اینترنت آزاد بپیوندید و
+                صدای مردم ایران باشید.</p>
+        </header>
+
+        <div class="code-container">
+            <code>&lt;script src="protest.js?size=md&countdown=true"&gt;&lt;/script&gt;</code>
+        </div>
+
+        <div class="demo-section">
+            <button onclick="updateSize('sm')">سایز کوچک</button>
+            <button onclick="updateSize('md')">سایز متوسط</button>
+            <button onclick="updateSize('lg')">سایز بزرگ</button>
+            <button class="btn-primary" onclick="clearStorage()">نمایش مجدد نوار</button>
+        </div>
+
+        <div class="guide-toggle" onclick="toggleGuide()">راهنمای سفارشی‌سازی ▾</div>
+        <div id="custom-guide" class="guide-content">
+            <h3>پارامترهای قابل تنظیم:</h3>
+            <ul>
+                <li><strong>size:</strong> مقادیر sm, md, lg برای تغییر اندازه نوار.</li>
+                <li><strong>countdown:</strong> نمایش یا عدم نمایش تعداد روزهای قطعی (true/false).</li>
+                <li><strong>text:</strong> متن دلخواه برای نمایش در نوار.</li>
+            </ul>
+
+            <h3 style="margin-top: 2rem; border-top: 1px solid #e2e8f0; padding-top: 1.5rem;">مثال‌های کاربردی:</h3>
+            <div
+                style="text-align: left; direction: ltr; background: #1e293b; color: #fff; padding: 15px; border-radius: 8px; margin-bottom: 15px; font-family: monospace; font-size: 0.9rem;">
+                &lt;script
+                src="https://unpkg.com/iran-net-protest-banner@latest/protest.js?size=lg&text=اینترنت_حق_همه_است"&gt;&lt;/script&gt;
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">حالت بنر بزرگ با متن اعتراضی
+                سفارشی</p>
+
+            <div
+                style="text-align: left; direction: ltr; background: #1e293b; color: #fff; padding: 15px; border-radius: 8px; margin-bottom: 15px; font-family: monospace; font-size: 0.9rem;">
+                &lt;script
+                src="https://unpkg.com/iran-net-protest-banner@latest/protest.js?size=sm&countdown=false"&gt;&lt;/script&gt;
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">حالت مینیمال (سایز کوچک و بدون
+                شمارنده روزها)</p>
+
+            <div
+                style="text-align: left; direction: ltr; background: #1e293b; color: #fff; padding: 15px; border-radius: 8px; margin-bottom: 15px; font-family: monospace; font-size: 0.9rem;">
+                &lt;script
+                src="https://unpkg.com/iran-net-protest-banner@latest/protest.js?text=آزادی_بیان_بدون_اینترنت_آزاد_ممکن_نیست"&gt;&lt;/script&gt;
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">تغییر متن پیام بدون تغییر سایر پارامترها</p>
+        </div>
+    </div>
+
+    <!-- The actual script being tested -->
+    <script id="protest-script" data-protest-size="md" src="protest.js?size=md&countdown=true"></script>
+
+    <script>
+        function updateSize(size) {
+            const oldBanner = document.getElementById('iran-protest-banner');
+            const oldStyle = document.getElementById('iran-protest-styles');
+            const mainScript = document.getElementById('protest-script');
+            const existingScripts = document.querySelectorAll('script[data-protest-preview="true"]');
+
+            if (oldBanner) oldBanner.remove();
+            if (oldStyle) oldStyle.remove();
+            if (mainScript) mainScript.remove();
+            existingScripts.forEach(script => script.remove());
+
+            // In the demo page, changing the size should always re-render the banner.
+            localStorage.removeItem('iran_net_protest_dismissed');
+
+            const script = document.createElement('script');
+            script.dataset.protestPreview = 'true';
+            script.dataset.protestSize = size;
+            script.src = `protest.js?size=${encodeURIComponent(size)}&countdown=true&t=${Date.now()}`;
+            document.body.appendChild(script);
+        }
+
+        function clearStorage() {
+            localStorage.removeItem('iran_net_protest_dismissed');
+            location.reload();
+        }
+
+        function toggleGuide() {
+            const guide = document.getElementById('custom-guide');
+            const toggle = document.querySelector('.guide-toggle');
+            if (guide.style.display === 'block') {
+                guide.style.display = 'none';
+                toggle.textContent = 'راهنمای سفارشی‌سازی ▾';
+            } else {
+                guide.style.display = 'block';
+                toggle.textContent = 'بستن راهنما ▴';
+            }
+        }
+    </script>
+</body>
+
+</html>

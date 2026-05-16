@@ -1,0 +1,25 @@
+{
+  "name": "iran-net-protest-banner",
+  "version": "1.0.0",
+  "description": "نمایش بنر اعتراضی برای اعتراض به قطعی اینترنت در ایران",
+  "main": "protest.js",
+  "scripts": {
+    "test": "echo \"No tests yet\""
+  },
+  "keywords": [
+    "iran",
+    "internet",
+    "protest",
+    "banner",
+    "net",
+    "cut",
+    "اعتراض",
+    "اینترنت"
+  ],
+  "author": "netizen",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/faryadzaman/net4all.git"
+  }
+}
